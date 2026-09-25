@@ -1,6 +1,7 @@
 <div align="center">
-
-# alxprgs.tech
+<p align="center">
+  <img src="./logo.svg" alt="alxprgs.tech logo" width="220">
+</p>
 
 ### Infrastructure · Software · Developer Tools
 
