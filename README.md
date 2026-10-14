@@ -21,7 +21,7 @@ Use it to find the common rules for contributing, report security issues private
 | `standards/design/ALXPRGS_DESIGN_LANGUAGE_v1.md` | Shared design standard | Written |
 | `standards/engineering/ENGINEERING.md` | Shared engineering guidance | Written |
 | `standards/security/SECURITY_BASELINE.md` | Shared technical security requirements | Written |
-| `templates/` | Project guidance templates for contributors and coding agents | Agent instructions written; project design template is a placeholder |
+| `templates/` | Project guidance templates for contributors and coding agents | Agent instructions and project design template written |
 | `agents/` | Reusable agent definitions | Placeholder |
 | `CONTRIBUTING.md` | Default contribution guidelines | Written |
 | `SECURITY.md` | Default vulnerability reporting policy | Written |
@@ -55,6 +55,10 @@ GitHub does not automatically distribute or enforce the contents of `standards/`
 5. Review both instruction files together for consistency. Update pinned standards deliberately in a separate scoped change; offline agents use the committed snapshots.
 
 These templates express the desired working rules. Instruction support and automatic discovery vary by agent and execution environment; they do not change platform permissions or guarantee that a hosted agent permits custom branch names. See the [Codex AGENTS.md guide](https://learn.chatgpt.com/docs/agent-configuration/agents-md) and [GitHub Copilot instruction documentation](https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/add-custom-instructions/add-repository-instructions).
+
+### Adopting the project design specification
+
+Copy [`templates/PROJECT_DESIGN.md`](templates/PROJECT_DESIGN.md) to `docs/design/PROJECT_DESIGN.md` or the project's established equivalent. Use the pinned design standard from the snapshot layout above, replace prompts with actual product decisions, and remove unused sections. The shared design language already defines the visual direction; the local specification selects relevant screens, journeys, layouts, components, and verification. For a project without a graphical interface, retain only the brief applicability statement described in the template.
 
 Reusable workflows must be explicitly called by another workflow. Organization workflow templates are starting points that users add to individual repositories; changes to a template do not automatically update existing copies. The current workflow files are empty and are not ready for use.
 
