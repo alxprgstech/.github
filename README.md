@@ -10,6 +10,7 @@ Use it to find the common rules for contributing, report security issues private
 - Report vulnerabilities using the private contact in the [security policy](SECURITY.md).
 - Use the [ALXPRGS Design Language v1](standards/design/ALXPRGS_DESIGN_LANGUAGE_v1.md) for applicable human-facing surfaces. Follow its guidance on selecting requirements for each project's scope.
 - Follow the [engineering standard](standards/engineering/ENGINEERING.md) for development, testing, startup, versioning, and changelog requirements.
+- Apply the [security baseline](standards/security/SECURITY_BASELINE.md) for access controls, secrets, production configuration, data recovery, and external integrations.
 - Read the target project's own documentation for setup, commands, and project-specific requirements.
 
 ## Repository layout
@@ -19,7 +20,7 @@ Use it to find the common rules for contributing, report security issues private
 | `profile/README.md` | Public organization profile on GitHub | Existing profile content |
 | `standards/design/ALXPRGS_DESIGN_LANGUAGE_v1.md` | Shared design standard | Written |
 | `standards/engineering/ENGINEERING.md` | Shared engineering guidance | Written |
-| `standards/security/SECURITY_BASELINE.md` | Shared technical security requirements | Placeholder |
+| `standards/security/SECURITY_BASELINE.md` | Shared technical security requirements | Written |
 | `templates/` | Project guidance templates for contributors and coding agents | Placeholders |
 | `agents/` | Reusable agent definitions | Placeholder |
 | `CONTRIBUTING.md` | Default contribution guidelines | Written |
