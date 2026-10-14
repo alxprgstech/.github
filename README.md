@@ -21,7 +21,7 @@ Use it to find the common rules for contributing, report security issues private
 | `standards/design/ALXPRGS_DESIGN_LANGUAGE_v1.md` | Shared design standard | Written |
 | `standards/engineering/ENGINEERING.md` | Shared engineering guidance | Written |
 | `standards/security/SECURITY_BASELINE.md` | Shared technical security requirements | Written |
-| `templates/` | Project guidance templates for contributors and coding agents | Placeholders |
+| `templates/` | Project guidance templates for contributors and coding agents | Agent instructions written; project design template is a placeholder |
 | `agents/` | Reusable agent definitions | Placeholder |
 | `CONTRIBUTING.md` | Default contribution guidelines | Written |
 | `SECURITY.md` | Default vulnerability reporting policy | Written |
@@ -45,6 +45,16 @@ The root README describes this shared repository. The separate [`profile/README.
 ### Standards and templates
 
 GitHub does not automatically distribute or enforce the contents of `standards/`, `templates/`, or `agents/`. Adopt relevant written guidance explicitly and document project-specific choices in the target repository. Do not treat empty placeholders as implemented policies.
+
+### Adopting agent instructions
+
+1. Copy [`templates/AGENTS.md`](templates/AGENTS.md) to the target repository root as `AGENTS.md` and [`templates/copilot-instructions.md`](templates/copilot-instructions.md) to `.github/copilot-instructions.md`. Merge with existing instructions rather than overwriting project knowledge.
+2. Select a reviewed full commit SHA of this repository. Copy the design, engineering, and security standards from that commit into the target's `docs/standards/`, preserving their `design/`, `engineering/`, and `security/` subdirectories, basenames, and contents. This preserves links between standards.
+3. Record the upstream repository, full SHA, original source paths, immutable source links, and adoption date in `docs/standards/SOURCE.md`. In this adopted layout, adapt links to `../../SECURITY.md` and `../../CONTRIBUTING.md` to `../../../SECURITY.md` and `../../../CONTRIBUTING.md`, respectively, and provide those project root policies. Record these reporting/contribution link adaptations in `SOURCE.md`; preserve all standard requirements. Verify other links when adopting a newer snapshot.
+4. Replace the project-context checklist in the adopted `AGENTS.md` with verified commands, working directories, prerequisites, contracts, applicability decisions, and known gaps. Remove adoption comments. Do not invent commands or claim checks were run merely because the template lists them.
+5. Review both instruction files together for consistency. Update pinned standards deliberately in a separate scoped change; offline agents use the committed snapshots.
+
+These templates express the desired working rules. Instruction support and automatic discovery vary by agent and execution environment; they do not change platform permissions or guarantee that a hosted agent permits custom branch names. See the [Codex AGENTS.md guide](https://learn.chatgpt.com/docs/agent-configuration/agents-md) and [GitHub Copilot instruction documentation](https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/add-custom-instructions/add-repository-instructions).
 
 Reusable workflows must be explicitly called by another workflow. Organization workflow templates are starting points that users add to individual repositories; changes to a template do not automatically update existing copies. The current workflow files are empty and are not ready for use.
 
