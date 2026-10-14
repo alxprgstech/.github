@@ -1,0 +1,31 @@
+name: Quality
+
+on:
+  push:
+    branches: [$default-branch]
+  pull_request:
+    branches: [$default-branch]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: quality-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    # Pinned to the shared implementation. Update deliberately after review.
+    uses: alxprgstech/.github/.github/workflows/reusable-quality.yml@fc6471722414f46da8212c253e73c8e4c17da712
+    with:
+      # Create these project-owned scripts before enabling this template.
+      # They run from the repository root and must fail on missing prerequisites.
+      # Do not substitute an echo/no-op to make CI green.
+      install-command: bash scripts/ci/install.sh
+      quality-command: bash scripts/ci/quality.sh
+      # Set explicit runtime versions where needed, consistent with project locks.
+      # python-version: '3.12'
+      # node-version: '24'
+      timeout-minutes: 20
+    # No secrets are inherited. Keep external integration and release jobs separate.
