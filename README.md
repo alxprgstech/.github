@@ -25,8 +25,8 @@ Use it to find the common rules for contributing, report security issues private
 | `agents/` | Reusable agent definitions | Placeholder |
 | `CONTRIBUTING.md` | Default contribution guidelines | Written |
 | `SECURITY.md` | Default vulnerability reporting policy | Written |
-| `.github/ISSUE_TEMPLATE/` | Default issue forms | Placeholders |
-| `.github/PULL_REQUEST_TEMPLATE.md` | Default pull request template | Placeholder |
+| `.github/ISSUE_TEMPLATE/` | Default issue forms | Bug report and feature request forms written |
+| `.github/PULL_REQUEST_TEMPLATE.md` | Default pull request template | Written |
 | `.github/workflows/` | Reusable GitHub Actions workflows | Placeholder |
 | `workflow-templates/` | Organization workflow templates | Placeholders |
 

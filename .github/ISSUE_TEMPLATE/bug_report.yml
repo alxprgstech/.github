@@ -1,0 +1,65 @@
+name: Bug report
+description: Report a reproducible problem in this project.
+title: "[Bug]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Search existing issues before submitting and report against the affected project.
+        Do not publish vulnerabilities here. Follow the project's security policy or email alxprgs@gmail.com privately.
+        Remove passwords, tokens, keys, cookies, personal data, and other confidential information from all text and attachments.
+  - type: textarea
+    id: summary
+    attributes:
+      label: Problem description
+      description: Explain what is broken and how it affects you.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Affected version or commit
+      description: Provide the release version or full commit SHA of the affected build, not just a branch name or "latest".
+      placeholder: "Version from VERSION, or the affected build's commit SHA"
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      description: Give numbered steps and a minimal sanitized example where useful. Explain any prerequisites.
+      placeholder: |
+        1. Open or run...
+        2. Perform...
+        3. Observe...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What should happen?
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: What happens instead? Include the visible error and how often it occurs.
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Sanitized logs
+      description: Paste the relevant sanitized log excerpt or attach a sanitized log file and describe it here. If no logs are produced or accessible, explicitly explain why. Never attach raw configuration dumps or secrets.
+      placeholder: "Relevant sanitized logs, or an explanation of why logs are unavailable."
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment (optional)
+      description: Relevant operating system, browser, runtime, deployment method, or configuration details. Include only non-sensitive information.
+    validations:
+      required: false

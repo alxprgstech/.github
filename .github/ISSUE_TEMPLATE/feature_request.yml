@@ -1,0 +1,38 @@
+name: Feature request
+description: Propose a useful improvement with a clear problem and benefit.
+title: "[Feature]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Search existing issues first. Explain the benefit of the change; changes for their own sake are unlikely to be accepted.
+        Discuss large changes, new dependencies, and architectural changes before implementation.
+        Do not include secrets or personal data. Report vulnerabilities privately through the project's security policy or alxprgs@gmail.com.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or use case
+      description: Describe the task you cannot complete or the problem with current behavior. Explain why existing capabilities are insufficient.
+    validations:
+      required: true
+  - type: textarea
+    id: benefit
+    attributes:
+      label: Expected benefit
+      description: Who would benefit, and what useful outcome would this change enable?
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution (optional)
+      description: Describe your suggested behavior and scope if you have an approach in mind. You do not need to design the implementation.
+    validations:
+      required: false
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered (optional)
+      description: Describe existing workarounds or other approaches and their limitations.
+    validations:
+      required: false
