@@ -1,0 +1,6 @@
+{
+  "name": "ALXPRGS quality checks",
+  "description": "Run explicit project quality gates through the pinned shared Linux workflow. Configure project setup and check scripts before use.",
+  "iconName": "octicon check-circle",
+  "categories": ["Continuous integration"]
+}

@@ -22,15 +22,15 @@ Use it to find the common rules for contributing, report security issues private
 | `standards/engineering/ENGINEERING.md` | Shared engineering guidance | Written |
 | `standards/security/SECURITY_BASELINE.md` | Shared technical security requirements | Written |
 | `templates/` | Project guidance templates for contributors and coding agents | Agent instructions and project design template written |
-| `agents/` | Reusable agent definitions | Placeholder |
+| `agents/` | Reusable agent definitions | Design reviewer written |
 | `CONTRIBUTING.md` | Default contribution guidelines | Written |
 | `SECURITY.md` | Default vulnerability reporting policy | Written |
 | `.github/ISSUE_TEMPLATE/` | Default issue forms | Bug report and feature request forms written |
 | `.github/PULL_REQUEST_TEMPLATE.md` | Default pull request template | Written |
-| `.github/workflows/` | Reusable GitHub Actions workflows | Placeholder |
-| `workflow-templates/` | Organization workflow templates | Placeholders |
+| `.github/workflows/` | Reusable GitHub Actions workflows | Configurable Linux quality workflow written |
+| `workflow-templates/` | Organization workflow templates | Quality caller and catalog metadata written |
 
-Placeholder files reserve the intended structure. They do not yet provide usable forms, workflows, agent instructions, or enforceable standards.
+All planned files now contain content. Templates still require project-specific adoption and validation; their presence alone does not implement checks in another repository.
 
 ## How to use these resources
 
@@ -60,7 +60,27 @@ These templates express the desired working rules. Instruction support and autom
 
 Copy [`templates/PROJECT_DESIGN.md`](templates/PROJECT_DESIGN.md) to `docs/design/PROJECT_DESIGN.md` or the project's established equivalent. Use the pinned design standard from the snapshot layout above, replace prompts with actual product decisions, and remove unused sections. The shared design language already defines the visual direction; the local specification selects relevant screens, journeys, layouts, components, and verification. For a project without a graphical interface, retain only the brief applicability statement described in the template.
 
-Reusable workflows must be explicitly called by another workflow. Organization workflow templates are starting points that users add to individual repositories; changes to a template do not automatically update existing copies. The current workflow files are empty and are not ready for use.
+### Using the design reviewer
+
+[`agents/design-reviewer.agent.md`](agents/design-reviewer.agent.md) is an organization custom-agent profile; for project-local adoption, copy it to `.github/agents/design-reviewer.agent.md`. It reviews against pinned standards without making fixes. Its tool list allows reading, searching, and configured Playwright browser tools, with no shell or editing tools. Provide an already running safe test interface for browser review. Browser tools and automatic organization-agent availability depend on the host; unsupported tools are not a guarantee of runtime inspection. See [GitHub custom agent configuration](https://docs.github.com/en/copilot/reference/custom-agents-configuration).
+
+### Connecting quality checks
+
+The [reusable workflow](.github/workflows/reusable-quality.yml) is a Linux execution wrapper, not a universal implementation of every standard. It checks out the caller's event revision (the merge revision for ordinary pull requests), disables persisted checkout credentials, optionally sets up explicitly selected Python/Node versions, and runs mandatory setup and quality commands from the repository root. Actions are pinned to full commits. It accepts no external secrets, has read-only repository permissions, and never releases or deploys.
+
+To adopt the [caller template](workflow-templates/quality.yml):
+
+1. Ensure the pinned shared workflow commit is available on GitHub. Local-only commits cannot be fetched by Actions; this repository must be published separately under explicit authorization before another repository can use the new workflow.
+2. Add the template through GitHub's Actions catalog, or copy it to the target project's `.github/workflows/quality.yml`. When copying manually, replace `$default-branch` with the actual default branch. Retain the reviewed full upstream SHA, updating it deliberately.
+3. Create project-owned `scripts/ci/install.sh` and `scripts/ci/quality.sh`, or replace the inputs with equivalent explicit commands. Set required runtime versions. For .NET or other tools, the setup script must provision and verify the required version reproducibly. Missing scripts or failed commands fail the job; do not replace them with no-ops.
+4. The quality command must enforce all applicable project gates: lint/type checks, tests, independent backend/frontend line and branch coverage of at least 75%, builds, dependency/security audits, and relevant version/changelog checks. Frontend projects also need canonical Lighthouse gates and critical browser journeys. Document commands, prerequisites, applicability, and manual checks in the target project. The wrapper cannot prove that an arbitrary command actually enforces these gates; review its implementation.
+5. Set up isolated databases and service dependencies explicitly in project scripts, or use dedicated project jobs where that is clearer. Services, configuration, and runtime state in a separate caller job are not automatically shared with this job. Never point test commands at production data.
+6. Keep Windows launcher regressions, real email/other quota-consuming external tests, and release workflows separate. SSO's existing specialized jobs must not be removed merely because a generic wrapper exists. A release workflow must validate and test its exact release commit; this template's normal PR/push run is not proof about another SHA.
+7. Review required status checks and repository protections during adoption; these files do not configure them. Keep untrusted PR execution on isolated GitHub-hosted runners without secrets. Do not use this command interface with privileged `pull_request_target`, inherited production secrets, or untrusted self-hosted runners.
+
+The wrapper runs only when called. Its supplied caller runs on pull requests targeting the default branch, pushes to that branch, and manual dispatch. Newer runs cancel superseded work for the same PR/ref. Ordinary checks do not invoke external email services; telemetry flag defaults are defensive hints, and each project's own configuration must actually keep external effects off. No artifacts are uploaded automatically, avoiding accidental publication of sensitive logs; projects may add explicit sanitized reports where needed. Verify a real Actions run after publishing and adopting before treating the integration as proven.
+
+Reusable workflows must be explicitly called by another workflow. Organization workflow templates are starting points that users add to individual repositories; changes to a template do not automatically update existing copies.
 
 ## Maintaining this repository
 

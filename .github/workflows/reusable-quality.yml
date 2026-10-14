@@ -1,0 +1,88 @@
+name: Reusable quality checks
+
+on:
+  workflow_call:
+    inputs:
+      install-command:
+        description: Explicit project setup command, including locked dependency installation.
+        required: true
+        type: string
+      quality-command:
+        description: Project command that enforces every applicable required check and exits nonzero on failure.
+        required: true
+        type: string
+      python-version:
+        description: Explicit Python version; leave empty if Python is not needed.
+        required: false
+        type: string
+        default: ''
+      node-version:
+        description: Explicit Node version; leave empty if Node is not needed.
+        required: false
+        type: string
+        default: ''
+      timeout-minutes:
+        description: Total job timeout, from 1 to 60 minutes.
+        required: false
+        type: number
+        default: 20
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    name: Project quality checks
+    runs-on: ubuntu-latest
+    timeout-minutes: ${{ inputs.timeout-minutes }}
+    env:
+      SENTRY_ENABLED: 'false'
+      SENTRY_FRONTEND_ENABLED: 'false'
+      SENTRY_REPLAY_ENABLED: 'false'
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Validate configuration
+        env:
+          INSTALL_COMMAND: ${{ inputs.install-command }}
+          QUALITY_COMMAND: ${{ inputs.quality-command }}
+          TIMEOUT: ${{ inputs.timeout-minutes }}
+        run: |
+          [[ "$INSTALL_COMMAND" =~ [^[:space:]] ]] || { echo '::error::install-command must not be empty'; exit 1; }
+          [[ "$QUALITY_COMMAND" =~ [^[:space:]] ]] || { echo '::error::quality-command must not be empty'; exit 1; }
+          [[ "$TIMEOUT" =~ ^[0-9]+$ ]] && (( TIMEOUT >= 1 && TIMEOUT <= 60 )) || { echo '::error::timeout-minutes must be an integer from 1 to 60'; exit 1; }
+      - name: Checkout caller revision
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Record checked revision
+        run: |
+          printf '### Quality checks\n\nSource commit: `%s`\n' "$(git rev-parse HEAD)" >> "$GITHUB_STEP_SUMMARY"
+      - name: Set up Python
+        if: inputs.python-version != ''
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: ${{ inputs.python-version }}
+      - name: Set up Node
+        if: inputs.node-version != ''
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+        with:
+          node-version: ${{ inputs.node-version }}
+          package-manager-cache: false
+      - name: Install project dependencies
+        env:
+          INSTALL_COMMAND: ${{ inputs.install-command }}
+        run: bash --noprofile --norc -e -o pipefail -c "$INSTALL_COMMAND"
+      - name: Enforce project quality gates
+        env:
+          QUALITY_COMMAND: ${{ inputs.quality-command }}
+        run: bash --noprofile --norc -e -o pipefail -c "$QUALITY_COMMAND"
+      - name: Summarize result
+        if: always()
+        env:
+          RESULT: ${{ job.status }}
+        run: |
+          printf '\nJob result: **%s**. See individual steps for failures or skipped work.\n' "$RESULT" >> "$GITHUB_STEP_SUMMARY"
+          printf 'Only the configured project commands were checked; this wrapper alone does not certify standards compliance.\n' >> "$GITHUB_STEP_SUMMARY"
