@@ -28,7 +28,9 @@ Write clear English commit messages. Conventional Commits are optional. Creating
 
 ## Shared standards
 
-Read the applicable local snapshots before implementation:
+Before implementation, read the applicable engineering and security requirements from the pinned local snapshots. For design work, read `docs/design/PROJECT_DESIGN.md` or its documented equivalent first, then consult only the relevant sections of the pinned design standard. Do not load the entire design standard into the active context by default; missing details in the local specification do not waive applicable canonical requirements.
+
+Snapshot paths:
 
 - `docs/standards/engineering/ENGINEERING.md`
 - `docs/standards/security/SECURITY_BASELINE.md`
@@ -46,7 +48,7 @@ Key requirements remain applicable:
 - Backend and frontend each need at least 75% line and branch coverage. Test critical security and integrity behavior independently of percentages.
 - Apply canonical frontend quality gates, including production builds, Lighthouse, and manual accessibility verification where relevant.
 - Runnable applications/services provide equivalent safe `start.ps1` and `start.sh`; Docker Compose is the default local service method, with documented exceptions.
-- Follow `VERSION`, SemVer, release-tag consistency, artifact source SHA, and changelog traceability requirements for released software.
+- Follow `VERSION`, SemVer, release-tag consistency, and artifact source SHA requirements for released software and versioned standards releases. Maintain changelog traceability for meaningful changes, including documentation, standards, and templates; unreleased standards snapshots may be identified by full commit SHA without a `VERSION` file.
 - Do not introduce real payments; payment experiments use YooKassa test mode only. Keep Session Replay off by default and avoid noisy quota-consuming diagnostics and tests.
 
 ## Tests and completion
@@ -68,6 +70,6 @@ Replace this section with verified project-specific facts before using this as t
 - Exact lint, type-check, test, coverage, build, dependency-audit, and applicable frontend audit commands, including prerequisites and isolated test data requirements.
 - SSO integration contract, important invariants, configuration examples, and external test prerequisites without secret values.
 - Local design specification path, standards source pin, applicability decisions, and documented exceptions or adoption gaps.
-- Release/version/changelog commands and artifact identity checks, if the project releases software.
+- Changelog maintenance commands; release/version commands and artifact identity checks if the project publishes versioned releases.
 
 Mark genuinely inapplicable items with a reason. Do not copy commands from another project without verification.

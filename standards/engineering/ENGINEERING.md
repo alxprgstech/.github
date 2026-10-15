@@ -89,6 +89,8 @@ Document prerequisites, startup commands, configuration, shutdown, and troublesh
 
 Released software follows [Semantic Versioning 2.0.0](https://semver.org/spec/v2.0.0.html). Keep the authoritative product version in a root `VERSION` file, without the tag's `v` prefix. Derive other version fields from it or check their consistency automatically; do not maintain conflicting independent copies.
 
+Repositories distributing shared standards, documentation, and templates must also maintain the changelog required by section 7. Until they introduce versioned releases, reviewed snapshots may be identified by full commit SHA without a `VERSION` file. When publishing their first versioned release, add `VERSION` and apply the same SemVer, matching-tag, immutability, and source-identity requirements to that release and subsequent releases. Merely storing documents does not require inventing a software version.
+
 | Change | Required increment |
 | --- | --- |
 | Compatible bug fix | PATCH |
@@ -107,6 +109,8 @@ Never move a published release tag or replace an artifact with different content
 ## 7. Changelog and commit traceability
 
 Maintain an English root `CHANGELOG.md` following [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Keep `Unreleased` first, followed by releases newest first. Release headings contain the version and an ISO date (`YYYY-MM-DD`). Use the categories `Added`, `Changed`, `Deprecated`, `Removed`, `Fixed`, and `Security`; omit empty categories.
+
+This requirement includes shared standards, documentation, and template repositories, even before their first versioned release. Record meaningful changes to rules, adoption guidance, and reusable workflows; do not invent release headings for snapshots that have not been released.
 
 Update `Unreleased` in the same pull request or local change series as every meaningful behavior, configuration, dependency, compatibility, security, or operational change. Explain the user or operator impact; a raw commit log is not a changelog. Typo-only and other changes with no meaningful impact may be omitted. Record breaking changes prominently and link migration instructions.
 

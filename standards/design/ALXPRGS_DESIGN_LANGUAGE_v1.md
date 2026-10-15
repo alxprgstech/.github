@@ -193,7 +193,7 @@ Components must not depend directly on arbitrary palette values.
 | `border-default` | `#2A303A` | Controls and visible boundaries |
 | `text-primary` | `#F5F7FA` | Main content |
 | `text-secondary` | `#B6BEC9` | Secondary copy |
-| `text-tertiary` | `#7E8896` | Metadata |
+| `text-tertiary` | `#858F9D` | Metadata |
 | `brand` | `#3B82F6` | Primary actions |
 | `brand-hover` | `#5594F8` | Primary hover |
 | `brand-active` | `#2563EB` | Pressed state |
@@ -222,7 +222,7 @@ Pure black may only be used for isolated deepest layers or media treatment.
 | `border-default` | `#CBD2DA` | Controls |
 | `text-primary` | `#111318` | Main content |
 | `text-secondary` | `#4B5563` | Secondary copy |
-| `text-tertiary` | `#77808C` | Metadata |
+| `text-tertiary` | `#606A77` | Metadata |
 | `brand` | `#2563EB` | Primary action |
 | `brand-hover` | `#1D4ED8` | Primary hover |
 | `brand-active` | `#1E40AF` | Pressed |
@@ -231,6 +231,8 @@ Pure black may only be used for isolated deepest layers or media treatment.
 | `warning` | `#D97706` | Warning |
 | `danger` | `#DC2626` | Failure |
 | `focus` | `#2563EB` | Focus |
+
+Ordinary text, including small metadata, must maintain at least 4.5:1 contrast against its actual background. The text tokens above meet that minimum on their theme's canvas, surface and hover backgrounds. Verify other pairings, including coloured controls and custom surfaces; a token name alone does not guarantee accessible contrast.
 
 ---
 
@@ -1414,7 +1416,7 @@ A project conforms to this standard **to the extent applicable to its intended p
 - Mobile, narrow and short-height interfaces are usable.
 - Keyboard, touch and assistive-technology accessibility expectations are met; applicable WCAG 2.2 AA checks are complete.
 - Security, privacy, permissions, data integrity and API contracts remain intact.
-- Lighthouse reports for applicable web pages meet §76 targets or have explicitly approved, narrowly documented exceptions.
+- Lighthouse reports for applicable web pages meet the standard release gates in §76 or have explicitly approved, narrowly documented exceptions. Performance requires a median of at least 95; the improvement target remains 100 and results below 100 must be investigated. Meeting the standard gates does not itself require an exception.
 - Relevant automated tests, regression checks and quality gates run in the project's normal workflow.
 - No unneeded pseudo-utility styling layer, duplicated component foundation or heavyweight decorative feature is retained merely from a previous project.
 

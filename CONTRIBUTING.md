@@ -17,9 +17,9 @@ These are the default guidelines for repositories in [alxprgstech](https://githu
 
 Use the relevant project's issue tracker and its issue forms when available.
 
-For a bug, include reproduction steps, expected and actual behavior, the affected version or commit, and relevant environment details. Add a minimal example or sanitized logs when helpful.
+For a bug, include a problem description, reproduction steps, expected and actual behavior, and the affected release version or full commit SHA. Include relevant sanitized logs, or explicitly explain why logs are not produced or accessible. Environment details are optional; include them when relevant. A minimal sanitized example is helpful where applicable.
 
-For a feature, describe the problem or use case, who benefits, and why existing behavior is insufficient. Explain alternatives you have considered.
+For a feature, describe the problem or use case, who benefits, and why existing behavior is insufficient. A proposed solution and alternatives considered are optional.
 
 Never include passwords, tokens, private keys, personal data, or other confidential information in reports, screenshots, logs, or example files.
 
