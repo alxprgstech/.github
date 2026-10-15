@@ -17,12 +17,12 @@ Meaningful changes to ALXPRGS shared standards, guidance, templates, and workflo
 
 ### Changed
 
-- Clarified changelog and versioning applicability for shared standards, documentation, and templates; introduced this repository's changelog without inventing a released version.
-- Clarified that the quality wrapper's default configuration does not guarantee the behavior of project-supplied commands or prohibit inherited secrets technically.
+- Clarified changelog and versioning applicability for shared standards, documentation, and templates; introduced this repository's changelog without inventing a released version. ([implementation](https://github.com/alxprgstech/.github/commit/08ca6acb89a06efbfa76a30c719cba62b119c9fc))
+- Clarified that the quality wrapper's default configuration does not guarantee the behavior of project-supplied commands or prohibit inherited secrets technically. ([implementation](https://github.com/alxprgstech/.github/commit/08ca6acb89a06efbfa76a30c719cba62b119c9fc))
 
 ### Fixed
 
-- Corrected metadata text contrast on canonical theme backgrounds and clarified that Lighthouse Performance has a release gate of at least 95 with a target of 100.
-- Aligned contribution guidance with issue-form requirements, made local-design-first reading explicit in agent instructions, and closed the organization profile's code block.
+- Corrected metadata text contrast on canonical theme backgrounds and clarified that Lighthouse Performance has a release gate of at least 95 with a target of 100. ([implementation](https://github.com/alxprgstech/.github/commit/08ca6acb89a06efbfa76a30c719cba62b119c9fc))
+- Aligned contribution guidance with issue-form requirements, made local-design-first reading explicit in agent instructions, and closed the organization profile's code block. ([implementation](https://github.com/alxprgstech/.github/commit/08ca6acb89a06efbfa76a30c719cba62b119c9fc))
 
 [Unreleased]: https://github.com/alxprgstech/.github/commits/main
