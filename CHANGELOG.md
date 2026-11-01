@@ -6,6 +6,9 @@ Meaningful changes to ALXPRGS shared standards, guidance, templates, and workflo
 
 ### Added
 
+- Added a required standard for built-in administrator help in projects with an admin interface, including the `Alt+Shift+Q` overlay, platform fallback, Server/Service groups, verified procedures, and content maintenance. ([admin guide standard](standards/operations/ADMIN_GUIDE_STANDARD.md))
+- Added a reusable controlled data-reset security standard for projects that need destructive administrative cleanup, including server-side authorization, staged confirmations, recoverable backups, SSO step-up, idempotency, and failure handling. ([standard](standards/security/CONTROLLED_DATA_RESET.md))
+- Added a general operator CLI standard for current and future projects, requiring a safe `self-update` command separate from application deployment. ([operator CLI standard](standards/operations/OPERATOR_CLI.md))
 - Shared repository structure and the canonical ALXPRGS design language. ([implementation](https://github.com/alxprgstech/.github/commit/f3c5f958e3145792863c70a509af8b2524b02de2))
 - Default contribution and private vulnerability-reporting policies. ([implementation](https://github.com/alxprgstech/.github/commit/4c05e8b21d1b8423ce6c2a869a1ca6cad321d43e))
 - Engineering requirements for architecture, isolated testing, independent coverage, safe startup, versioning, and release traceability. ([implementation](https://github.com/alxprgstech/.github/commit/b4a09c6ad3f466ce46a5b59e4d0ece65d58f27b9))
@@ -17,6 +20,14 @@ Meaningful changes to ALXPRGS shared standards, guidance, templates, and workflo
 
 ### Changed
 
+- Updated project instructions, design-spec template, and adoption guidance to apply the administrator guide standard whenever a project has an administrative interface.
+- Updated the visual style guide with read-only SSO and MP observations, removing fixed SSO-derived color examples and clarifying that both are optional, distinct references. ([design standard](standards/design/ALXPRGS_DESIGN_LANGUAGE_v1.md))
+- Translated all project templates into Russian and aligned design guidance with product-specific visual choices rather than inherited layouts or universal frontend gates. ([templates](templates/))
+- Translated the security baseline into Russian while preserving its technical requirements and references. ([standard](standards/security/SECURITY_BASELINE.md))
+- Translated the engineering standard into Russian and updated frontend quality guidance to match the visual-style-only design guide. ([standard](standards/engineering/ENGINEERING.md))
+- Translated the organization profile README into Russian. ([profile](profile/README.md))
+- Translated the design reviewer profile into Russian and aligned its review scope with the visual-style-only design guide. ([profile](agents/design-reviewer.agent.md))
+- Переработано руководство по дизайну: оставлены необязательные рекомендации по визуальному стилю, убраны предписания к продукту, сценариям, архитектуре и критериям качества, чтобы SSO, MP и другие сервисы могли сохранять собственные интерфейсы. ([стандарт дизайна](standards/design/ALXPRGS_DESIGN_LANGUAGE_v1.md))
 - Clarified changelog and versioning applicability for shared standards, documentation, and templates; introduced this repository's changelog without inventing a released version. ([implementation](https://github.com/alxprgstech/.github/commit/08ca6acb89a06efbfa76a30c719cba62b119c9fc))
 - Clarified that the quality wrapper's default configuration does not guarantee the behavior of project-supplied commands or prohibit inherited secrets technically. ([implementation](https://github.com/alxprgstech/.github/commit/08ca6acb89a06efbfa76a30c719cba62b119c9fc))
 

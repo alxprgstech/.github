@@ -1,140 +1,133 @@
-# ALXPRGS engineering standard
+# Инженерный стандарт ALXPRGS
 
-This document defines the shared engineering baseline for ALXPRGS projects. Apply requirements to the project's actual scope: a library does not need a service launcher, and a headless API does not need a frontend or Lighthouse audits.
+Этот документ задаёт общую инженерную основу для проектов ALXPRGS. Применяйте требования с учётом фактической области проекта: библиотеке не нужен запускатель сервиса, а API без интерфейса не нужны frontend и проверки Lighthouse.
 
-Project documentation must identify applicable requirements, commands, and evidence. Adoption of this document is not evidence that an existing project already complies. Existing projects must document gaps and their remediation rather than claim unverified conformance. Mandatory requirements must not be silently weakened by local guidance.
+В документации проекта должны быть указаны применимые требования, команды и подтверждения их выполнения. Само принятие этого документа не доказывает, что существующий проект ему соответствует. Существующие проекты должны описывать пробелы и план их устранения, а не заявлять о неподтверждённом соответствии. Обязательные требования нельзя незаметно ослаблять в локальных инструкциях.
 
-## 1. Technology and architecture
+## 1. Технологии и архитектура
 
-- Python is the primary backend language; FastAPI is the default web API framework.
-- .NET is an option for workloads with substantial expected load. Explain the workload, performance requirements, and operational tradeoffs before selecting it; do not migrate a working service solely on an assumption about language speed.
-- React, Vite, and Tailwind CSS are the default frontend stack.
-- Protected services use the central [ALXPRGS SSO](https://github.com/alxprgstech/sso). Use its documented integration contract and SDK where suitable. Do not introduce duplicate local account or login systems. Public services without authentication do not need to add it merely to conform.
-- Follow the existing project's architecture and documented contracts. Discuss major architectural changes and new dependencies before implementation, as required by the [contribution guidelines](../../CONTRIBUTING.md).
+- Основной язык серверной части — Python; FastAPI — стандартный выбор для веб-API.
+- .NET можно выбрать для задач с ожидаемой высокой нагрузкой. До выбора объясните особенности нагрузки, требования к производительности и эксплуатационные компромиссы. Не переносите работающий сервис только на основании предположений о скорости языка.
+- Стандартный стек клиентской части — React, Vite и Tailwind CSS.
+- Защищённые сервисы используют центральный [ALXPRGS SSO](https://github.com/alxprgstech/sso). При наличии подходящего решения используйте документированный контракт интеграции и SDK. Не создавайте дублирующие локальные системы учётных записей и входа. Публичным сервисам без аутентификации не нужно добавлять её только ради соответствия стандарту.
+- Следуйте существующей архитектуре проекта и документированным контрактам. Крупные архитектурные изменения и новые зависимости следует обсуждать до реализации согласно [правилам участия](../../CONTRIBUTING.md).
 
-These preferences guide new development; they do not require every project to contain every layer or force unrelated projects into one architecture.
+Эти предпочтения служат ориентиром для новых разработок: они не требуют включать в каждый проект все уровни стека и не заставляют несвязанные проекты использовать одну архитектуру.
 
-## 2. Implementation baseline
+## 2. Основы реализации
 
-Keep changes focused and explain the problem they solve. Prefer clear, maintainable code and established project patterns over speculative abstractions.
+Ограничивайте изменения конкретной задачей и объясняйте, какую проблему они решают. Предпочитайте понятный, поддерживаемый код и принятые в проекте подходы абстракциям, основанным на догадках.
 
-Validate untrusted input at system boundaries. Enforce authorization on the server; interface visibility is not an access control. Preserve established security and data integrity invariants. Never commit credentials, private keys, production data, or other secrets; provide sanitized configuration examples instead.
+Проверяйте недоверенные данные на границах системы. Проверяйте права доступа на сервере: скрытый элемент интерфейса не является контролем доступа. Сохраняйте установленные требования безопасности и целостности данных. Не добавляйте в репозиторий учётные данные, закрытые ключи, производственные данные и другие секреты; вместо них приводите очищенные примеры конфигурации.
 
-Handle failures explicitly, with useful messages and appropriate status codes. Logs must help diagnosis without disclosing secrets or unnecessary personal data. Set appropriate timeouts for external operations and document retry behavior where applicable.
+Явно обрабатывайте ошибки, возвращая понятные сообщения и подходящие коды состояния. Логи должны помогать диагностике, не раскрывая секреты и ненужные персональные данные. Задавайте подходящие тайм-ауты для внешних операций и, если применимо, документируйте поведение повторных попыток.
 
-Document public API, configuration, and data-format contracts. Preserve compatibility or explicitly identify the breaking change, affected consumers, migration steps, and required release increment. Database changes must include a migration and a safe upgrade procedure; document recovery limitations and destructive steps before execution.
+Документируйте контракты публичных API, конфигураций и форматов данных. Сохраняйте совместимость либо явно описывайте несовместимое изменение, затронутых потребителей, шаги миграции и требуемое повышение версии. Изменения базы данных должны включать миграцию и безопасную процедуру обновления; до выполнения документируйте ограничения восстановления и разрушительные шаги.
 
-Update setup, usage, operations, and troubleshooting documentation when behavior changes. Separate implemented behavior, verified behavior, and planned work.
+При изменении поведения обновляйте документацию по настройке, использованию, эксплуатации и диагностике. Разделяйте реализованное, проверенное и запланированное поведение.
 
-## 3. Dependencies and reproducibility
+## 3. Зависимости и воспроизводимость
 
-Reuse existing project capabilities when suitable. Add a dependency when its benefit justifies its maintenance, security, license, and operational costs. Explain the choice; writing everything from scratch is not a goal.
+По возможности используйте уже имеющиеся в проекте средства. Добавляйте зависимость, если её польза оправдывает затраты на сопровождение, безопасность, лицензирование и эксплуатацию. Обоснуйте выбор; переписывать всё самостоятельно не требуется.
 
-Commit ecosystem-appropriate lock files or equivalent resolved dependency specifications for reproducible application installation. Document supported runtime versions and clean-install commands. Keep dependency updates scoped and review their compatibility and security impact.
+Добавляйте в репозиторий подходящие для используемой экосистемы lock-файлы или эквивалентные спецификации разрешённых версий зависимостей, чтобы установка приложения была воспроизводимой. Документируйте поддерживаемые версии сред выполнения и команды чистой установки. Ограничивайте обновления зависимостей и проверяйте их совместимость и влияние на безопасность.
 
-Do not ignore applicable dependency audit failures without recording the affected dependency, impact, mitigation, owner, and resolution or review date. A newly introduced unresolved high or critical vulnerability blocks release unless the project owner explicitly accepts a documented exception.
+Не игнорируйте применимые ошибки аудита зависимостей без записи о затронутой зависимости, влиянии, мерах снижения риска, ответственном лице и дате решения или пересмотра. Новая неустранённая уязвимость высокого или критического уровня блокирует релиз, если владелец проекта явно не принял документированное исключение.
 
-## 4. Testing and coverage
+## 4. Тестирование и покрытие
 
-### Required coverage
+### Требования к покрытию
 
-Backend and frontend must each achieve **at least 75% line coverage and at least 75% branch coverage**, measured independently. A combined average cannot compensate for a failing component. In a backend with separately tested Python and .NET components, report and enforce each component independently.
+Покрытие строк и ветвей кода серверной и клиентской частей должно составлять **не менее 75% для каждой части отдельно**. Общий средний показатель не может компенсировать недостаточное покрытие одного из компонентов. Если в серверной части отдельно тестируются компоненты на Python и .NET, настройте и укажите покрытие каждого компонента независимо.
 
-Configure explicit CI thresholds and retain readable reports. Include all applicable first-party executable source in the denominator, including unimported or untested files. Exclusions must be narrow and documented, such as generated code, vendored code, or nonexecutable declarations. Do not exclude difficult business logic or security paths to raise a score. Pure documentation has no code coverage requirement.
+Настройте явные пороги в CI и сохраняйте понятные отчёты. В знаменатель включайте весь применимый исполняемый исходный код проекта, в том числе неимпортированные и непокрытые тестами файлы. Исключения должны быть узкими и документированными, например для сгенерированного или стороннего кода, а также деклараций без исполняемой логики. Не исключайте сложную бизнес-логику или пути безопасности ради повышения показателя. Для документации покрытие кода не требуется.
 
-Coverage is a minimum, not proof of correctness. Independently test critical authentication, authorization, token/session handling, validation, and data integrity scenarios, including relevant negative cases, replay, concurrency, and failure behavior. A passing percentage does not excuse an untested critical path.
+Покрытие — минимальный порог, а не доказательство корректности. Отдельно проверяйте критичные сценарии аутентификации, авторизации, обработки токенов и сессий, валидации и целостности данных, включая применимые негативные сценарии, повторы запросов, параллельное выполнение и обработку ошибок. Прохождение процентного порога не отменяет проверки критичных путей.
 
-### Test selection and isolation
+### Выбор и изоляция тестов
 
-- Add meaningful tests for new behavior and regression tests for corrected defects where applicable.
-- Use unit tests for isolated logic, integration tests for real boundaries, and end-to-end tests for critical user journeys. Avoid tests that merely repeat implementation details.
-- Use pytest for Python projects; use appropriate maintained tools for .NET and frontend projects. Document actual commands locally rather than copying commands from another project without checking them.
-- Ordinary tests must not send external emails, charge accounts, or mutate live services. External integration tests run separately with explicit configuration and test identities.
-- Database tests must use a dedicated test database with safeguards against production or development data loss. Document required setup and migrations.
-- Report skipped external checks and their reasons explicitly. Missing credentials may skip an optional external job, but a skipped job is not evidence of delivery or integration success. If an integration check is required for a release, missing prerequisites block that release.
+- При необходимости добавляйте содержательные тесты нового поведения и регрессионные тесты исправленных дефектов.
+- Используйте модульные тесты для изолированной логики, интеграционные — для реальных границ компонентов, сквозные — для критичных пользовательских сценариев. Избегайте тестов, которые лишь повторяют детали реализации.
+- Для Python-проектов используйте pytest; для .NET и клиентских проектов выбирайте подходящие поддерживаемые инструменты. Документируйте фактические команды в проекте, предварительно проверив их, а не копируя команды из другого репозитория.
+- Обычные тесты не должны отправлять внешние письма, списывать средства со счетов или изменять работающие сервисы. Внешние интеграционные тесты запускайте отдельно, с явной конфигурацией и тестовыми учётными записями.
+- Тесты базы данных должны использовать выделенную тестовую базу с защитой от потери производственных или рабочих данных. Документируйте необходимые настройки и миграции.
+- Явно указывайте пропущенные внешние проверки и причины пропуска. Отсутствие учётных данных может привести к пропуску необязательной внешней задачи, но не подтверждает работоспособность интеграции или доставку. Если интеграционная проверка обязательна для релиза, отсутствие необходимых условий блокирует релиз.
 
-### Frontend verification
+### Проверки клиентской части
 
-For projects with a frontend, normal checks must include linting, applicable type checking (including test code), unit/component tests, a production build, and dependency auditing. Test critical journeys end to end, including SSO integration where applicable. Document exact commands and prerequisites in the project.
+Для проектов с клиентской частью обычные проверки должны включать линтинг, применимую проверку типов (включая тестовый код), модульные тесты и тесты компонентов, сборку для production и аудит зависимостей. Проверяйте критичные сценарии сквозными тестами, включая интеграцию с SSO, если она используется. Точные команды и необходимые условия документируйте в проекте.
 
-The [ALXPRGS Design Language v1](../design/ALXPRGS_DESIGN_LANGUAGE_v1.md), especially sections 76 and 77, defines mandatory web quality and accessibility requirements. It remains the canonical source for their details:
+[Руководство ALXPRGS по визуальному стилю](../design/ALXPRGS_DESIGN_LANGUAGE_v1.md) содержит необязательные визуальные ориентиры и не задаёт глобальные пороги Lighthouse, обязательную структуру интерфейса или универсальные критерии готовности продукта. Проект должен определить применимые требования к доступности, производительности и качеству в своей локальной документации с учётом типа и аудитории интерфейса. Указывайте проверенные маршруты и состояния, конфигурацию, фактические результаты и известные ограничения. Автоматические оценки не заменяют необходимые ручные проверки доступности.
 
-- Target Lighthouse 100 in every applicable category on representative mobile and desktop surfaces.
-- The standard performance release gate is a median of at least 95, with every result below 100 investigated and a continued target of 98–100; applicable Accessibility, Best Practices, and public-page SEO gates are 100, subject to the canonical document's applicability rules and documented limitations.
-- Audit production-mode builds, with at least three runs per tested configuration, representative routes and states, and safe access to protected screens.
-- Automate audits and regression thresholds in CI. Retain reports and investigate failures.
-- Perform manual keyboard, focus, touch, screen-reader, and high-zoom checks. Automated scores do not replace manual accessibility verification.
-- Follow the canonical standard for real-user performance, retesting triggers, and narrowly scoped exceptions. Releases below its standard gates require explicit project-owner approval.
+Не ослабляйте безопасность, не удаляйте работающую функциональность и не подменяйте тестируемое содержимое ради улучшения показателей. Lighthouse неприменим к проектам без проверяемых веб-страниц.
 
-Do not weaken security, remove real functionality, or manipulate tested content to improve scores. Lighthouse is not applicable to projects without auditable web pages.
+## 5. Запуск в разных средах
 
-## 5. Cross-platform startup
+Каждое запускаемое приложение или сервис должно иметь в корне `start.ps1` для PowerShell и `start.sh` для Bash с эквивалентным поддерживаемым поведением. Библиотекам и репозиториям только с документацией не нужны искусственные запускатели; для запускаемых примеров необходимо документировать команду запуска.
 
-Every runnable application or service must provide root-level `start.ps1` for PowerShell and `start.sh` for Bash with equivalent supported behavior. Libraries and documentation-only repositories do not need artificial launchers; runnable examples must document how to start them.
+Docker Compose — стандартный способ локального запуска сервисов. Другой способ допустим, если проект документирует причину, необходимые условия и эквивалентный процесс запуска. Это требование не предписывает использовать Docker Compose для production-размещения.
 
-Docker Compose is the default local startup method for services. A different method is allowed when the project documents the reason, prerequisites, and equivalent startup behavior. This does not mandate Docker Compose for production hosting.
+Оба запускателя должны:
 
-Both launchers must:
+1. Определять пути к проекту и конфигурации относительно собственного расположения независимо от текущего каталога вызывающего процесса.
+2. До запуска проверять необходимые инструменты, поддерживаемые версии, доступность среды выполнения и нужных портов; при проблеме выводить понятную инструкцию и завершаться с ненулевым кодом.
+3. Помогать безопасно настроить проект при первом запуске. При необходимости генерировать секреты безопасным способом, не выводить их и не перезаписывать существующую конфигурацию или секреты при повторном запуске.
+4. Запускать документированную локальную среду и проверять её готовность в течение ограниченного времени. Не сообщать об успехе только на основании создания процесса.
+5. При повторном запуске сохранять существующие базы данных, учётные записи, тома и конфигурацию. Операции разрушительного сброса выполнять отдельно и только после явного подтверждения с описанием затрагиваемых данных.
+6. Выводить полезные локальные адреса и дальнейшие шаги, не раскрывая учётных данных. По умолчанию привязывать локальные службы к loopback-интерфейсу, если документированный сценарий не требует иного.
 
-1. Resolve project and configuration paths relative to the script, independent of the caller's current directory.
-2. Check required tools, supported versions, runtime availability, and relevant ports before startup; provide actionable errors and nonzero exit status on failure.
-3. Guide safe initial configuration. Generate secrets securely when needed, never print them, and never overwrite existing configuration or secrets on repeat runs.
-4. Start the documented local environment and verify readiness within a bounded timeout. Do not report success merely because a process was created.
-5. Preserve existing databases, users, volumes, and configuration on repeat runs. Keep destructive reset operations separate and require explicit confirmation describing the affected data.
-6. Print useful local addresses and next steps without exposing credentials. Default local bindings to loopback unless a documented use case requires otherwise.
+Документируйте необходимые условия, команды запуска, конфигурацию, остановку и диагностику. Проверьте первый и повторный запуск в поддерживаемых средах Windows/PowerShell и Unix/Bash либо укажите, какая проверка ещё не выполнена. Не заявляйте о поддержке macOS только на основании успешной работы скрипта в Linux.
 
-Document prerequisites, startup commands, configuration, shutdown, and troubleshooting. Verify first startup and repeat startup on the supported Windows/PowerShell and Unix/Bash environments, or state which verification remains outstanding. Do not claim macOS support solely because a script works on Linux.
+## 6. Версии и идентификация сборок
 
-## 6. Versioning and build identity
+Выпускаемое программное обеспечение должно соответствовать [Semantic Versioning 2.0.0](https://semver.org/spec/v2.0.0.html). Храните основную версию продукта в корневом файле `VERSION` без префикса `v`, используемого в теге. Выводите остальные поля версии из него или автоматически проверяйте их согласованность; не поддерживайте противоречащие друг другу независимые копии.
 
-Released software follows [Semantic Versioning 2.0.0](https://semver.org/spec/v2.0.0.html). Keep the authoritative product version in a root `VERSION` file, without the tag's `v` prefix. Derive other version fields from it or check their consistency automatically; do not maintain conflicting independent copies.
+Репозитории с общими стандартами, документацией и шаблонами также должны вести changelog согласно разделу 7. Пока в них нет версионных релизов, проверенные снимки можно идентифицировать полным SHA коммита без файла `VERSION`. При публикации первого версионного релиза добавьте `VERSION` и применяйте к нему и следующим релизам те же требования SemVer, совпадения тегов, неизменности и идентификации источника. Само хранение документов не требует придумывать версию программного обеспечения.
 
-Repositories distributing shared standards, documentation, and templates must also maintain the changelog required by section 7. Until they introduce versioned releases, reviewed snapshots may be identified by full commit SHA without a `VERSION` file. When publishing their first versioned release, add `VERSION` and apply the same SemVer, matching-tag, immutability, and source-identity requirements to that release and subsequent releases. Merely storing documents does not require inventing a software version.
+| Изменение | Требуемое повышение версии |
+|---|---|
+| Совместимое исправление ошибки | PATCH |
+| Совместимая новая функция или объявление об устаревании | MINOR |
+| Несовместимое изменение контракта в версии 1.0.0 или выше | MAJOR |
+| Несовместимое изменение до версии 1.0.0 | MINOR с обнулением PATCH |
 
-| Change | Required increment |
-| --- | --- |
-| Compatible bug fix | PATCH |
-| Compatible new capability or deprecation | MINOR |
-| Breaking contract change at 1.0.0 or later | MAJOR |
-| Breaking contract change before 1.0.0 | MINOR, resetting PATCH |
+Правило о несовместимых изменениях до версии 1.0.0 — соглашение ALXPRGS, дополняющее правила SemVer для начального этапа разработки. Документируйте совместимость и до версии 1.0.0. При необходимости используйте корректные предварительные версии SemVer, например `1.0.0-rc.1`.
 
-The pre-1.0 breaking-change rule is an ALXPRGS convention layered on SemVer's initial-development rules. Document compatibility even before 1.0.0. Use valid SemVer prereleases when needed, such as `1.0.0-rc.1`.
+Для каждого релиза создавайте соответствующий тег, например `v1.2.3`, указывающий на точный коммит релиза. Файл `VERSION`, заголовок релиза в changelog, метаданные релиза и версии артефактов продукта в коммите релиза должны совпадать. Компоненты с действительно независимыми циклами релизов должны явно документировать собственные источники версий и пространства имён тегов.
 
-Each release must have a matching tag, such as `v1.2.3`, pointing to the exact release commit. The release commit's `VERSION`, changelog heading, release metadata, and product artifact versions must agree. Components with genuinely independent release lifecycles must explicitly document their own version sources and tag namespaces.
+В метаданные сборки записывайте версию продукта и полный SHA исходного коммита, чтобы можно было установить, из какого кода получен артефакт или развёрнутый сервис. Соблюдайте требования соответствующей экосистемы пакетов к представлению версии. Обозначайте локальные сборки с незакоммиченными изменениями как изменённые; не выдавайте их за точные копии чистого релиза.
 
-Builds must record both the product version and the full source commit SHA in appropriate build metadata so an artifact or deployed service can be traced to its source. Preserve package ecosystem version compatibility when representing metadata. Identify uncommitted local builds as dirty; do not present them as exact reproductions of a clean release commit.
+Не перемещайте опубликованный тег релиза и не заменяйте содержимое артефакта под уже выпущенной версией. Для исправлений выпускайте новую версию. Обычный коммит разработки не требует повышения версии; согласованно меняйте её при подготовке релиза.
 
-Never move a published release tag or replace an artifact with different contents under the same released version. Corrections require a new version. A normal development commit does not require a version bump; perform the coordinated version change when preparing the release.
+## 7. История изменений и связь с коммитами
 
-## 7. Changelog and commit traceability
+Ведите корневой файл `CHANGELOG.md` на английском языке согласно стандарту [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Сначала размещайте раздел `Unreleased`, затем релизы от новых к старым. В заголовках релизов указывайте версию и дату в формате ISO (`YYYY-MM-DD`). Используйте категории `Added`, `Changed`, `Deprecated`, `Removed`, `Fixed` и `Security`; пустые категории опускайте.
 
-Maintain an English root `CHANGELOG.md` following [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Keep `Unreleased` first, followed by releases newest first. Release headings contain the version and an ISO date (`YYYY-MM-DD`). Use the categories `Added`, `Changed`, `Deprecated`, `Removed`, `Fixed`, and `Security`; omit empty categories.
+Это требование распространяется на репозитории с общими стандартами, документацией и шаблонами, даже до первого версионного релиза. Записывайте значимые изменения правил, рекомендаций по внедрению и переиспользуемых workflow; не создавайте заголовки релизов для ещё не выпущенных снимков.
 
-This requirement includes shared standards, documentation, and template repositories, even before their first versioned release. Record meaningful changes to rules, adoption guidance, and reusable workflows; do not invent release headings for snapshots that have not been released.
+Обновляйте раздел `Unreleased` в том же pull request или серии локальных изменений, что и любое значимое изменение поведения, конфигурации, зависимостей, совместимости, безопасности или эксплуатации. Объясняйте влияние на пользователей или операторов; простой список коммитов не заменяет changelog. Изменения только в опечатках и другие изменения без существенного влияния можно не указывать. Явно выделяйте несовместимые изменения и добавляйте ссылки на инструкции по миграции.
 
-Update `Unreleased` in the same pull request or local change series as every meaningful behavior, configuration, dependency, compatibility, security, or operational change. Explain the user or operator impact; a raw commit log is not a changelog. Typo-only and other changes with no meaningful impact may be omitted. Record breaking changes prominently and link migration instructions.
+Каждая значимая запись должна ссылаться на соответствующий коммит или коммиты реализации в целевом репозитории. Ссылки на задачи и pull request полезны как контекст, но не заменяют итоговые ссылки на коммиты. Ссылки должны вести на коммиты, содержащие описанную работу, а не только изменение документации.
 
-Every meaningful entry must link to the relevant implementation commit or commits in the target repository. Issue and pull request links provide useful context but do not replace final commit links. Links must identify commits that actually contain the described work, not only a documentation edit.
+Git-коммит не может содержать собственный итоговый хеш. Для новой записи добавьте ссылку на коммит реализации последующим коммитом документации или подготовки релиза. До слияния pull request ссылки могут вести на уже существующие коммиты реализации; после squash или rebase обновите их до итоговых коммитов целевой ветки отдельным последующим коммитом. Не придумывайте хеши и не пытайтесь многократно изменять коммит, чтобы добавить ссылку на самого себя. Перед созданием тега релиза все включённые в релиз ссылки должны быть окончательно проверены.
 
-Git commits cannot contain their own final hash. For a new entry, add the implementation commit link in a subsequent documentation or release-preparation commit. Before merging a pull request, links may point to its existing implementation commits; after squash or rebase, update them to the final commits in the target branch in a follow-up commit. Do not invent hashes or repeatedly amend a commit trying to reference itself. All entries included in a release must have finalized links before the release tag is created.
+Каждый заголовок релиза должен ссылаться на сравнение предыдущего и текущего тегов. Раздел `Unreleased` должен ссылаться на сравнение последнего тега релиза с веткой разработки. Для первого релиза укажите тег релиза, не придумывая предыдущий тег. Если релизов ещё не было, временная ссылка из `Unreleased` может вести на историю коммитов ветки разработки.
 
-Each release heading must link to the comparison between the preceding and current release tags. `Unreleased` links to the comparison between the latest release tag and the development branch. For the first release, link to its release tag instead of inventing a preceding tag. For a project without any release, an interim `Unreleased` link may point to its development commit history.
+Записи о безопасности должны учитывать согласованное раскрытие информации: после получения разрешения на раскрытие указывайте соответствующее влияние и меры устранения, не публикуя преждевременно детали эксплуатации или секреты.
 
-Security entries must respect coordinated disclosure: record appropriate impact and remediation when disclosure is authorized, without prematurely exposing exploit details or secrets.
+## 8. Приёмка CI и релизов
 
-## 8. CI and release acceptance
+Документируйте и автоматизируйте применимые проверки линтинга, типов, тестов, независимых порогов покрытия, сборок и аудита зависимостей. Перед релизом также проверяйте согласованность версии, структуру changelog и ссылки на коммиты. Для проектов только с документацией используйте подходящие проверки документов и ссылок; неприменимые проверки среды выполнения не требуются.
 
-Projects must document and automate applicable linting, type checks, tests, independent coverage thresholds, builds, dependency audits, and web quality gates. Also check version consistency and changelog structure and traceability before release. Documentation-only projects use relevant documentation and link checks; irrelevant runtime checks are not required.
+Неуспешная обязательная проверка блокирует релиз. Пропущенная, невыполненная или недоступная обязательная проверка не считается пройденной. Для узких исключений фиксируйте причину, влияние, меры снижения риска, ответственного и дату пересмотра. Выпуск с исключением требует одобрения владельца проекта; требования локального продукта и применимые требования безопасности при этом сохраняются.
 
-Failed required checks block release. A skipped, unexecuted, or unavailable required check is not a pass. Record narrowly scoped exceptions with the reason, impact, mitigation, owner, and review date; project-owner approval is required to release with an exception, and canonical design requirements still apply.
+Перед релизом проверьте:
 
-Before release, verify:
+- Проверены необходимые контракты, миграции, границы SSO и критичные сценарии.
+- Обязательные проверки проекта пройдены; для клиентской и серверной частей отдельно выполнены применимые требования к покрытию.
+- Запускатели и задокументированная настройка работают в заявленных поддерживаемых средах.
+- `VERSION`, changelog, итоговые ссылки на коммиты, предполагаемый тег и артефакты согласованы.
+- Инструкции по обновлению, конфигурации и восстановлению отражают влияние релиза.
+- Релиз связан с чистым исходным коммитом и фактическими результатами его проверок.
 
-- Relevant contracts, migrations, SSO boundaries, and critical scenarios are tested.
-- Required checks and frontend gates pass, including independent coverage thresholds.
-- Launchers and documented setup work on the claimed supported environments.
-- `VERSION`, the changelog, final commit links, proposed tag, and artifacts agree.
-- Upgrade, configuration, and recovery instructions reflect the release's impact.
-- The release can be traced to a clean source commit and its actual validation results.
-
-Applying this standard requires project-specific implementation and evidence. Publishing the standard alone does not install CI checks, change SSO, release software, or deploy services.
+Применение этого стандарта требует реализации и подтверждений в конкретном проекте. Публикация стандарта сама по себе не настраивает проверки CI, не меняет SSO, не выпускает программное обеспечение и не развёртывает сервисы.

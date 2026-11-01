@@ -1,65 +1,65 @@
-name: Bug report
-description: Report a reproducible problem in this project.
-title: "[Bug]: "
+name: Сообщить об ошибке
+description: Опишите воспроизводимую проблему в этом проекте.
+title: "[Ошибка]: "
 body:
   - type: markdown
     attributes:
       value: |
-        Search existing issues before submitting and report against the affected project.
-        Do not publish vulnerabilities here. Follow the project's security policy or email alxprgs@gmail.com privately.
-        Remove passwords, tokens, keys, cookies, personal data, and other confidential information from all text and attachments.
+        Перед отправкой проверьте существующие задачи и укажите проект, в котором возникла проблема.
+        Не публикуйте здесь сведения об уязвимостях. Следуйте политике безопасности проекта или напишите конфиденциально на alxprgs@gmail.com.
+        Удалите пароли, токены, ключи, файлы cookie, персональные данные и другую конфиденциальную информацию из текста и вложений.
   - type: textarea
     id: summary
     attributes:
-      label: Problem description
-      description: Explain what is broken and how it affects you.
+      label: Описание проблемы
+      description: Объясните, что работает неправильно и как это влияет на вас.
     validations:
       required: true
   - type: input
     id: version
     attributes:
-      label: Affected version or commit
-      description: Provide the release version or full commit SHA of the affected build, not just a branch name or "latest".
-      placeholder: "Version from VERSION, or the affected build's commit SHA"
+      label: Версия или коммит, в котором возникла проблема
+      description: Укажите версию релиза или полный SHA коммита проблемной сборки, а не только название ветки или «latest».
+      placeholder: "Версия из VERSION или SHA коммита проблемной сборки"
     validations:
       required: true
   - type: textarea
     id: reproduction
     attributes:
-      label: Steps to reproduce
-      description: Give numbered steps and a minimal sanitized example where useful. Explain any prerequisites.
+      label: Шаги для воспроизведения
+      description: Перечислите шаги по порядку и, если полезно, добавьте минимальный пример без конфиденциальных данных. Укажите необходимые условия.
       placeholder: |
-        1. Open or run...
-        2. Perform...
-        3. Observe...
+        1. Откройте или запустите...
+        2. Выполните...
+        3. Проверьте результат...
     validations:
       required: true
   - type: textarea
     id: expected
     attributes:
-      label: Expected behavior
-      description: What should happen?
+      label: Ожидаемое поведение
+      description: Что должно произойти?
     validations:
       required: true
   - type: textarea
     id: actual
     attributes:
-      label: Actual behavior
-      description: What happens instead? Include the visible error and how often it occurs.
+      label: Фактическое поведение
+      description: Что происходит вместо этого? Укажите видимую ошибку и частоту её появления.
     validations:
       required: true
   - type: textarea
     id: logs
     attributes:
-      label: Sanitized logs
-      description: Paste the relevant sanitized log excerpt or attach a sanitized log file and describe it here. If no logs are produced or accessible, explicitly explain why. Never attach raw configuration dumps or secrets.
-      placeholder: "Relevant sanitized logs, or an explanation of why logs are unavailable."
+      label: Логи без конфиденциальных данных
+      description: Вставьте нужный фрагмент логов после удаления конфиденциальных данных либо приложите очищенный файл и опишите его. Если логи не создаются или недоступны, объясните почему. Не прикладывайте дампы конфигурации и секреты.
+      placeholder: "Нужные логи после удаления конфиденциальных данных или объяснение, почему они недоступны."
     validations:
       required: true
   - type: textarea
     id: environment
     attributes:
-      label: Environment (optional)
-      description: Relevant operating system, browser, runtime, deployment method, or configuration details. Include only non-sensitive information.
+      label: Окружение (необязательно)
+      description: Подходящие к проблеме сведения об операционной системе, браузере, среде выполнения, способе развёртывания или конфигурации. Указывайте только неконфиденциальную информацию.
     validations:
       required: false

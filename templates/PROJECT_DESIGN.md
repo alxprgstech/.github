@@ -1,51 +1,52 @@
-# Project design specification
+# Спецификация дизайна проекта
 
-<!-- Adoption: copy to docs/design/PROJECT_DESIGN.md or the project's established equivalent. Replace the prompts with verified project decisions, remove unused sections and these adoption instructions, and keep the result concise. Paths below assume the documented docs/standards/ snapshot layout. -->
+<!-- Внедрение: скопируйте файл в docs/design/PROJECT_DESIGN.md или используемый в проекте аналог. Замените подсказки проверенными решениями проекта, удалите неприменимые разделы и эту инструкцию по внедрению, сохраняйте документ кратким. Пути ниже предполагают, что снимки стандартов находятся в docs/standards/. -->
 
-The visual language is defined by the project's pinned `docs/standards/design/ALXPRGS_DESIGN_LANGUAGE_v1.md`, with provenance in `docs/standards/SOURCE.md`. Apply that standard; do not reopen its established brand, typography, color, theme, motion, or component principles as a new visual-direction exercise. This document specifies their application to this product, not a replacement design system.
+Руководство по визуальному стилю проекта находится в закреплённой копии `docs/standards/design/ALXPRGS_DESIGN_LANGUAGE_v1.md`; источник копии указан в `docs/standards/SOURCE.md`. Руководство задаёт необязательные стилистические ориентиры, а не готовую систему дизайна или шаблон продукта. Эта спецификация описывает, что подходит конкретному продукту, какие решения он принял самостоятельно и какие части общего руководства полезны для него.
 
-Use the local specification first during implementation and consult relevant canonical sections as needed. Missing details here do not waive applicable canonical requirements. Keep this file current when product scope changes, and distinguish intended behavior from implemented and verified behavior.
+Используйте локальную спецификацию как основной источник сведений о дизайне продукта. Обращайтесь к общему руководству только при необходимости. Обновляйте этот файл при изменении области продукта и различайте планируемое, реализованное и проверенное поведение.
 
-## 1. Product and applicability
+## 1. Продукт и область применения
 
-- **Purpose and users:** State the problem, intended users, and primary tasks.
-- **Surfaces:** Identify what is required now, reasonably foreseeable, and not applicable. Include only actual product needs; do not add dashboards, administration, login screens, or other features solely because the canonical standard discusses them.
-- **Known constraints:** Record relevant existing architecture, framework, devices, and integration contracts from verified project facts.
+- **Назначение и пользователи:** Какую проблему решает продукт, для кого он предназначен и какие задачи помогают выполнять его основные функции?
+- **Интерфейсы:** Какие графические или текстовые интерфейсы существуют и какие из них входят в область этой спецификации? Указывайте реальные потребности продукта; не добавляйте панели мониторинга, администрирование, экраны входа или другие функции только потому, что они упоминаются в общих материалах.
+- **Административный интерфейс:** Если он есть, укажите роли и основные задачи администраторов, а также расположение и содержание справочника по `docs/standards/operations/ADMIN_GUIDE_STANDARD.md`.
+- **Известные ограничения:** Укажите подтверждённые факты о существующей архитектуре, технологиях, устройствах и контрактах интеграций.
 
-**Projects without a graphical interface:** Keep only a brief statement of purpose and the absence of a graphical interface. Remove sections 2–5 and record a deviation only if one actually exists. No screen, theme, component, responsive-layout, or Lighthouse specification is required. Relevant engineering and security requirements still apply, and any actual documentation or CLI surface follows applicable canonical guidance without inventing a frontend. Revisit applicability if a graphical surface is later introduced.
+**Проекты без графического интерфейса:** Оставьте краткое описание назначения и отметьте отсутствие графического интерфейса. Удалите неприменимые разделы и укажите только реальные ограничения или отклонения. Не создавайте спецификации экранов, тем, компонентов и адаптивной компоновки. Для существующих интерфейсов командной строки или документации учитывайте только относящиеся к ним требования. Пересмотрите область применения, если позднее появится графический интерфейс.
 
-## 2. User journeys and navigation
+## 2. Сценарии и навигация
 
-List only the core journeys and screens needed now. For each, record:
+Перечислите только важные для текущего объёма продукта сценарии и экраны. Для каждого укажите:
 
-- The user's goal, entry point or route, and successful outcome.
-- Required data and actions, navigation and browser-history behavior where relevant.
-- Public or protected access and any role or ownership boundaries. Protected resources use central ALXPRGS SSO; this document does not invent a separate local login system.
+- Цель пользователя, точку входа или маршрут и ожидаемый результат.
+- Необходимые данные и действия, а также навигацию и поведение истории браузера, если это важно.
+- Публичный или защищённый характер доступа и применимые границы ролей или владения. Защищённые ресурсы используют центральный ALXPRGS SSO; эта спецификация не вводит отдельную локальную систему входа.
 
-Ask focused requirements questions when the product behavior remains unclear after inspecting the task and project. Do not ask the owner to choose a new visual language already settled by the canonical standard. Routine details within established rules can be resolved during implementation.
+Если после изучения задачи и проекта поведение продукта всё ещё неясно, задайте конкретные вопросы о требованиях. Не просите выбрать заново визуальное направление, уже установленное самим продуктом. Обычные детали реализации в рамках подтверждённых требований можно решить по ходу работы.
 
-## 3. Layout and component application
+## 3. Визуальное направление и интерфейс
 
-Describe the information hierarchy, appropriate interaction density, and relevant screen layouts. Select the smallest useful component subset from the established system and project implementation; avoid importing unrelated SSO or administrative patterns.
+Опишите информационную иерархию, подходящую плотность взаимодействия и композицию только тех экранов, которые действительно нужны. Укажите, какие существующие компоненты полезны, и какие решения продукт принимает самостоятельно. Не переносите в проект шаблоны SSO или административных интерфейсов без соответствующей потребности.
 
-Record where official assets, semantic tokens, and existing components live, or where they will be implemented if this is a new project. Document project-specific mapping decisions without copying the entire canonical palette or token catalogue.
+Укажите, где находятся подходящие логотипы, цветовые переменные и компоненты, если они используются. Зафиксируйте выбранные проектом шрифты, цвета, формы, оформление тем и анимацию лишь в той степени, которая помогает реализации. Не обязательно использовать всю палитру или повторять любой пример из общего руководства.
 
-Graphical web interfaces must retain the applicable canonical baseline: official ALXPRGS identity, semantic tokens, dark/light/system theme selection, accessible interaction, responsive layouts, and purposeful reduced-motion-aware behavior. State how the project's real layouts work on narrow and short viewports, including dense content where present.
+Если есть графический интерфейс, опишите, как его визуальный стиль и расположение элементов подстраиваются под важные для продукта размеры экранов и объёмы содержимого. Не предписывайте мобильную навигацию, тип оболочки приложения или обязательный набор компонентов без подтверждённой потребности.
 
-## 4. States and interaction
+## 4. Состояния и взаимодействие
 
-For relevant journeys and components, define loading, success, empty, validation, failure, access-denied, and long-running states. Include recovery actions, disabled states, confirmation of destructive operations, and unsaved-change behavior only where needed.
+Для нужных сценариев и компонентов укажите важные состояния: загрузку, успех, пустое содержимое, валидацию, ошибку, отказ в доступе или длительную операцию — только если они относятся к продукту. Опишите действия для восстановления, отключённые состояния, подтверждение разрушительных операций и поведение несохранённых изменений, если это необходимо.
 
-Keep feedback truthful. Identify mock data explicitly and never imply that fabricated health, activity, or metrics are live. Preserve server-side security boundaries and avoid exposing secrets or unnecessary implementation details.
+Обратная связь должна правдиво отражать состояние продукта. Явно обозначайте тестовые данные и не выдавайте искусственные показатели здоровья, активности или метрик за реальные. Сохраняйте серверные границы безопасности и не раскрывайте секреты или ненужные детали реализации.
 
-## 5. Verification and evidence
+## 5. Проверки и подтверждения
 
-Select representative routes, states, mobile/desktop configurations, and critical journeys for this project. Record the exact verification commands, prerequisites, and report locations, or link to the project's maintained testing document rather than duplicating it.
+Выберите подходящие для проекта маршруты, состояния, устройства и критичные сценарии. Укажите точные команды, предварительные условия и расположение отчётов либо дайте ссылку на документацию по тестированию проекта, чтобы не дублировать её.
 
-Apply canonical sections 76 and 77 for production-mode Lighthouse audits, at least three runs per tested configuration, category release gates, manual accessibility checks, and applicable real-user performance targets. Follow the engineering standard for frontend checks, critical end-to-end journeys, and independent coverage requirements. Do not replace these requirements with a weaker local checklist.
+Определите применимые требования к функциональности, доступности, адаптивности и производительности с учётом продукта. Укажите, что проверяется автоматически, что требует ручной проверки и какие результаты служат критерием готовности. Не считайте пример из руководства по визуальному стилю обязательным порогом качества.
 
-Record the tested commit/build and results separately from planned checks. Include keyboard/focus, touch, screen-reader, high-zoom, responsive layouts, themes, and reduced-motion verification as applicable. A written specification or automated accessibility score alone is not proof of conformance.
+Отдельно фиксируйте проверенную ревизию или сборку и фактические результаты. Для интерфейсов при необходимости проверяйте клавиатуру и фокус, сенсорное управление, экранный диктор, увеличение, разные размеры экрана, темы и настройку уменьшения движения. Наличие письменной спецификации или высокая автоматическая оценка сами по себе не доказывают соответствие.
 
-## 6. Deviations, if any
+## 6. Отклонения и ограничения
 
-Remove this section if there are no deviations. Otherwise record the canonical rule, technical reason, replacement behavior, affected surfaces, impact and mitigation, and explicit owner approval. For release-gate exceptions, include the owner and revisit date plus the evidence required by the canonical standard. Do not silently redefine mandatory rules or label an applicable failing requirement as not applicable.
+Удалите этот раздел, если у проекта нет специальных отклонений или ограничений. Иначе укажите затронутое правило или решение, техническую причину, заменяющее поведение, затронутые интерфейсы, влияние и меры снижения риска, а также требуемое согласование. Если проект использует собственные критерии выпуска, укажите ответственного, дату пересмотра и нужные подтверждения. Не называйте применимое требование неприменимым без причины.

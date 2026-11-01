@@ -11,6 +11,9 @@ Use it to find the common rules for contributing, report security issues private
 - Use the [ALXPRGS Design Language v1](standards/design/ALXPRGS_DESIGN_LANGUAGE_v1.md) for applicable human-facing surfaces. Follow its guidance on selecting requirements for each project's scope.
 - Follow the [engineering standard](standards/engineering/ENGINEERING.md) for development, testing, startup, versioning, and changelog requirements.
 - Apply the [security baseline](standards/security/SECURITY_BASELINE.md) for access controls, secrets, production configuration, data recovery, and external integrations.
+- For products that need a destructive data-reset capability, apply the [controlled data-reset standard](standards/security/CONTROLLED_DATA_RESET.md); it does not require every project to add such a feature.
+- Apply the [operator `ctl` standard](standards/operations/OPERATOR_CLI.md) to current and future projects with operator CLI tools. It requires a safe `self-update` command and keeps operator updates separate from application deployment.
+- Projects with an administrative interface must follow the [admin guide standard](standards/operations/ADMIN_GUIDE_STANDARD.md) for their built-in Server/Service help panel and administrator workflows.
 - Read the target project's own documentation for setup, commands, and project-specific requirements.
 
 ## Repository layout
@@ -21,6 +24,9 @@ Use it to find the common rules for contributing, report security issues private
 | `standards/design/ALXPRGS_DESIGN_LANGUAGE_v1.md` | Shared design standard | Written |
 | `standards/engineering/ENGINEERING.md` | Shared engineering guidance | Written |
 | `standards/security/SECURITY_BASELINE.md` | Shared technical security requirements | Written |
+| `standards/security/CONTROLLED_DATA_RESET.md` | Reusable security pattern for optional destructive data-reset workflows | Written |
+| `standards/operations/OPERATOR_CLI.md` | General operator CLI standard for current and future projects | Written |
+| `standards/operations/ADMIN_GUIDE_STANDARD.md` | Required built-in administrator guide for projects with an administrative interface | Written |
 | `templates/` | Project guidance templates for contributors and coding agents | Agent instructions and project design template written |
 | `agents/` | Reusable agent definitions | Design reviewer written |
 | `CONTRIBUTING.md` | Default contribution guidelines | Written |
@@ -50,7 +56,7 @@ GitHub does not automatically distribute or enforce the contents of `standards/`
 ### Adopting agent instructions
 
 1. Copy [`templates/AGENTS.md`](templates/AGENTS.md) to the target repository root as `AGENTS.md` and [`templates/copilot-instructions.md`](templates/copilot-instructions.md) to `.github/copilot-instructions.md`. Merge with existing instructions rather than overwriting project knowledge.
-2. Select a reviewed full commit SHA of this repository. Copy the design, engineering, and security standards from that commit into the target's `docs/standards/`, preserving their `design/`, `engineering/`, and `security/` subdirectories, basenames, and contents. This preserves links between standards.
+2. Select a reviewed full commit SHA of this repository. Copy the design, engineering, and security standards from that commit into the target's `docs/standards/`, preserving their subdirectories, basenames, and contents. Also copy `standards/operations/ADMIN_GUIDE_STANDARD.md` when the project has an administrative interface, and `standards/operations/OPERATOR_CLI.md` when it provides an operator `ctl`. This preserves links between standards.
 3. Record the upstream repository, full SHA, original source paths, immutable source links, and adoption date in `docs/standards/SOURCE.md`. In this adopted layout, adapt links to `../../SECURITY.md` and `../../CONTRIBUTING.md` to `../../../SECURITY.md` and `../../../CONTRIBUTING.md`, respectively, and provide those project root policies. Record these reporting/contribution link adaptations in `SOURCE.md`; preserve all standard requirements. Verify other links when adopting a newer snapshot.
 4. Replace the project-context checklist in the adopted `AGENTS.md` with verified commands, working directories, prerequisites, contracts, applicability decisions, and known gaps. Remove adoption comments. Do not invent commands or claim checks were run merely because the template lists them.
 5. Review both instruction files together for consistency. Update pinned standards deliberately in a separate scoped change; offline agents use the committed snapshots.
@@ -61,7 +67,9 @@ These templates express the desired working rules. Instruction support and autom
 
 ### Adopting the project design specification
 
-Copy [`templates/PROJECT_DESIGN.md`](templates/PROJECT_DESIGN.md) to `docs/design/PROJECT_DESIGN.md` or the project's established equivalent. Use the pinned design standard from the snapshot layout above, replace prompts with actual product decisions, and remove unused sections. The shared design language already defines the visual direction; the local specification selects relevant screens, journeys, layouts, components, and verification. For a project without a graphical interface, retain only the brief applicability statement described in the template.
+Copy [`templates/PROJECT_DESIGN.md`](templates/PROJECT_DESIGN.md) to `docs/design/PROJECT_DESIGN.md` or the project's established equivalent. Use the pinned design guide from the snapshot layout above as an optional source of visual cues, replace prompts with actual product decisions, and remove unused sections. The local specification defines the product's own screens, journeys, layouts, and components. For a project without a graphical interface, retain only the brief applicability statement described in the template.
+
+For projects with an administrative interface, the local specification should also identify the administrator roles, workflows, and content owner for the built-in guide required by `ADMIN_GUIDE_STANDARD.md`. Server commands, platform-specific key procedures, and service workflows must be verified against the project's current implementation and release.
 
 ### Using the design reviewer
 

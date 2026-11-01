@@ -1,67 +1,67 @@
 <div align="center">
 <p align="center">
-  <img src="./logo.svg" alt="alxprgs.tech logo" width="220">
+  <img src="./logo.svg" alt="Логотип alxprgs.tech" width="220">
 </p>
 
-### Infrastructure · Software · Developer Tools
+### Инфраструктура · Программное обеспечение · Инструменты разработчика
 
-Building and maintaining personal infrastructure, web services, APIs,
-automation tools and open-source projects.
+Разработка и поддержка личной инфраструктуры, веб-сервисов, API,
+инструментов автоматизации и проектов с открытым исходным кодом.
 
-[![Website](https://img.shields.io/badge/Website-alxprgs.tech-2563EB?style=for-the-badge&logo=googlechrome&logoColor=white)](https://alxprgs.tech)
+[![Веб-сайт](https://img.shields.io/badge/Website-alxprgs.tech-2563EB?style=for-the-badge&logo=googlechrome&logoColor=white)](https://alxprgs.tech)
 [![GitHub](https://img.shields.io/badge/GitHub-alxprgstech-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/alxprgstech/)
 
 </div>
 
 ---
 
-## About
+## О проекте
 
-**alxprgs.tech** is a personal technology ecosystem for developing,
-deploying and maintaining software, infrastructure and experimental projects.
+**alxprgs.tech** — личная технологическая экосистема для разработки,
+развёртывания и поддержки программного обеспечения, инфраструктуры и экспериментальных проектов.
 
-The organization brings together backend services, web applications,
-APIs, authentication systems, automation tools and infrastructure components
-under a single environment.
+В организации собраны серверные службы, веб-приложения,
+API, системы аутентификации, инструменты автоматизации и компоненты инфраструктуры,
+работающие в единой среде.
 
-The main focus is on building practical systems that can be deployed,
-maintained and expanded over time.
+Основное внимание уделяется практичным системам, которые можно развёртывать,
+поддерживать и постепенно расширять.
 
 ---
 
-## Core Stack
+## Основной стек
 
-| Area | Technologies |
+| Область | Технологии |
 |---|---|
-| Backend | Python · FastAPI |
-| Frontend | React · Vite · JavaScript / TypeScript |
-| Infrastructure | Linux · Docker · Docker Compose |
-| Cloud | AWS · Microsoft Azure |
-| Networking | Cloudflare · DNS · Reverse Proxy |
-| Databases | PostgreSQL · MongoDB · SQLite |
-| Development | Git · GitHub · GitHub Actions |
-| APIs | REST · OAuth2 · JWT · OpenAPI |
+| Серверная часть | Python · FastAPI |
+| Клиентская часть | React · Vite · JavaScript / TypeScript |
+| Инфраструктура | Linux · Docker · Docker Compose |
+| Облачные платформы | AWS · Microsoft Azure |
+| Сети | Cloudflare · DNS · обратный прокси |
+| Базы данных | PostgreSQL · MongoDB · SQLite |
+| Разработка | Git · GitHub · GitHub Actions |
+| API | REST · OAuth2 · JWT · OpenAPI |
 
 ---
 
-## Cloud Infrastructure
+## Облачная инфраструктура
 
-Infrastructure is primarily hosted on VPS and cloud services provided by:
+Инфраструктура преимущественно размещается на VPS и в облачных сервисах:
 
 - **Amazon Web Services**
 - **Microsoft Azure**
 
-Services are deployed using Linux-based environments, Docker containers
-and automated deployment workflows.
+Сервисы развёртываются в средах на базе Linux с использованием контейнеров Docker
+и автоматизированных процессов развёртывания.
 
-The main domain for the ecosystem is:
+Основной домен экосистемы:
 
 ### `alxprgs.tech`
 
-It is used as the central namespace for websites, APIs, services,
-development environments and infrastructure components.
+Он используется как общее пространство имён для сайтов, API, сервисов,
+сред разработки и компонентов инфраструктуры.
 
-Example structure:
+Пример структуры:
 
 ```text
 alxprgs.tech

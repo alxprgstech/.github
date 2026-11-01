@@ -1,25 +1,25 @@
-<!-- Keep this description focused on the final change. Replace prompts with actual information; use "Not applicable" with a reason where needed. Do not mark unperformed checks as passed. Never include secrets or private vulnerability details. Use the project's security policy or alxprgs@gmail.com for private security reports. -->
+<!-- Описывайте итоговые изменения по существу. Замените подсказки фактической информацией; если пункт неприменим, укажите причину. Не отмечайте невыполненные проверки как пройденные. Не добавляйте секреты и сведения о неисправленных уязвимостях. Для конфиденциальных сообщений об уязвимостях используйте политику безопасности проекта или alxprgs@gmail.com. -->
 
-## Problem and changes
+## Проблема и изменения
 
-<!-- Explain the problem, why the change is useful, and the resulting behavior. Note any new dependencies and their justification. -->
+<!-- Опишите проблему, пользу изменений и итоговое поведение. Укажите новые зависимости и обоснуйте их добавление. -->
 
-## Related issues
+## Связанные задачи
 
-<!-- Link relevant issues. Use "Closes #..." only when this PR resolves that issue. An issue is not required for every small fix. -->
+<!-- Добавьте ссылки на связанные задачи. Используйте «Closes #...» только если этот PR решает указанную задачу. Для небольших исправлений задача не обязательна. -->
 
-## Verification
+## Проверки
 
-<!-- List actual commands/manual checks, relevant environment or build, and results. Explicitly identify failures, skips, and checks not run, with reasons. For runtime changes, include applicable test/coverage/build/audit results; for UI changes, include relevant Lighthouse and manual accessibility evidence. Link reports where useful. -->
+<!-- Перечислите фактически выполненные команды и ручные проверки, укажите окружение или сборку и результаты. Отдельно отметьте проверки с ошибками, пропущенные и невыполненные — с причинами. Для изменений во время выполнения укажите относящиеся к ним результаты тестов, покрытия, сборки и аудита; для изменений интерфейса — результаты Lighthouse и ручной проверки доступности. При необходимости приложите ссылки на отчёты. -->
 
-## Compatibility and operations
+## Совместимость и эксплуатация
 
-<!-- State breaking changes, API/data/configuration changes, migrations, deployment impact, and recovery considerations. Link upgrade instructions where needed, or state that there is no such impact. -->
+<!-- Укажите несовместимые изменения, изменения API, данных или конфигурации, миграции, влияние на развёртывание и способы восстановления. При необходимости добавьте инструкции по обновлению либо укажите, что влияния нет. -->
 
-## Changelog
+## История изменений
 
-<!-- Link the relevant Unreleased entry, or explain why no entry is needed. Meaningful entries must trace to implementation commits. Identify any commit links awaiting finalization after commit creation or squash/rebase; finalize them before release. -->
+<!-- Добавьте ссылку на соответствующую запись в разделе Unreleased или объясните, почему запись не нужна. Значимые записи должны ссылаться на коммиты с реализацией. Отметьте ссылки на коммиты, которые нужно уточнить после создания коммита, squash или rebase; завершите их до релиза. -->
 
-## Interface evidence
+## Демонстрация интерфейса
 
-<!-- For UI changes, add useful screenshots or a recording showing relevant states, themes, and viewport sizes. Sanitize sensitive information. Otherwise remove this section. -->
+<!-- Для изменений интерфейса добавьте полезные снимки экрана или запись с нужными состояниями, темами и размерами окна. Удалите конфиденциальные данные. Если изменений интерфейса нет, удалите этот раздел. -->
