@@ -1,0 +1,12 @@
+{
+  "format": 1,
+  "repository": "alxprgstech/mp-ryazanskiy",
+  "bundle": "mp-ec2.tar.gz",
+  "transport": "stream",
+  "user": "mpdeploy",
+  "verify": [
+    ["-m", "scripts.check_transport_security"],
+    ["-m", "scripts.check_ec2_runtime", "--bundle", "{bundle}", "--sha", "{sha}"]
+  ],
+  "public_check": [["scripts/check_public_readiness.py", "--sha", "{sha}"]]
+}

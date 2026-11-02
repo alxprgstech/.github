@@ -6,6 +6,8 @@ Meaningful changes to ALXPRGS shared standards, guidance, templates, and workflo
 
 ### Added
 
+- Canonical EC2 deployment driver, MP/SSO profiles, synchronization/check helper and shared regression tests; combines immutable transport verification with structured deployment results while retaining project runner and server contracts. See [delivery guide](deploy/ec2/README.md). Local implementation is uncommitted.
+
 - Added a required standard for built-in administrator help in projects with an admin interface, including the `Alt+Shift+Q` overlay, platform fallback, Server/Service groups, verified procedures, and content maintenance. ([admin guide standard](standards/operations/ADMIN_GUIDE_STANDARD.md), [implementation](https://github.com/alxprgstech/.github/commit/1c2ff6f8618ab74e3dd9ee2465fe6ca9799db788))
 - Added a reusable controlled data-reset security standard for projects that need destructive administrative cleanup, including server-side authorization, staged confirmations, recoverable backups, SSO step-up, idempotency, and failure handling. ([standard](standards/security/CONTROLLED_DATA_RESET.md), [implementation](https://github.com/alxprgstech/.github/commit/1c2ff6f8618ab74e3dd9ee2465fe6ca9799db788))
 - Added a general operator CLI standard for current and future projects, requiring a safe `self-update` command separate from application deployment. ([operator CLI standard](standards/operations/OPERATOR_CLI.md), [implementation](https://github.com/alxprgstech/.github/commit/1c2ff6f8618ab74e3dd9ee2465fe6ca9799db788))

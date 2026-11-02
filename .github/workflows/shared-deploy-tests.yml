@@ -1,0 +1,21 @@
+name: Shared deployment tests
+
+on:
+  push:
+    paths: ['deploy/ec2/**', 'tests/test_shared_deploy.py', '.github/workflows/shared-deploy-tests.yml']
+  pull_request:
+    paths: ['deploy/ec2/**', 'tests/test_shared_deploy.py', '.github/workflows/shared-deploy-tests.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - run: python3 -m unittest discover -s tests -p test_shared_deploy.py -v
+      - run: bash -n deploy/ec2/upload.sh

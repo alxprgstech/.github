@@ -107,3 +107,11 @@ This repository does not grant a shared license to other projects. Check each pr
 - [Organization profile README](https://docs.github.com/en/organizations/collaborating-with-groups-in-organizations/customizing-your-organizations-profile)
 - [Reusing workflows](https://docs.github.com/en/actions/how-tos/reuse-automations/reuse-workflows)
 - [Creating workflow templates](https://docs.github.com/en/actions/how-tos/reuse-automations/create-workflow-templates)
+
+
+### Shared EC2 delivery
+
+The [shared deployment driver](deploy/ec2/README.md) provides byte-identical
+MP/SSO build, verification, upload, public-check and reporting logic with explicit
+project profiles. Adopt it with the synchronization/check helper; it is not an
+automatic production deployment from this repository.
